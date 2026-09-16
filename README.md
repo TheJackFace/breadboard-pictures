@@ -8,6 +8,13 @@ The part drawings come from the [Fritzing parts library](https://github.com/frit
 about 2,100 parts, fetched on demand. The skill reads leg positions and connected holes from the
 library's own part files, so any part with a breadboard drawing can be placed.
 
+<p>
+  <img src="docs/step-led.png" alt="Step: an LED placed in holes G10 and G14, shown in colour with both holes circled and named; the resistor from the previous step is greyed out." width="49%">
+  <img src="docs/step-button.png" alt="Next step: a push button across the centre channel, legs in F14, F16, E14 and E16; the LED and resistor are now greyed out." width="49%">
+</p>
+
+*Two consecutive steps from `assets/template.html`. Part and breadboard drawings: [Fritzing parts library](https://github.com/fritzing/fritzing-parts), CC BY-SA 3.0; these two images are CC BY-SA 3.0 as well.*
+
 ## Install
 
 Clone it into your Claude Code skills folder:

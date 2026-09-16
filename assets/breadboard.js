@@ -540,9 +540,15 @@
   const DIRS = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0],
                  "up-left": [-1, -1], "up-right": [1, -1], "down-left": [-1, 1], "down-right": [1, 1] };
 
+  let clampBox = null;                         // the figure's view, so labels stay inside it
   function pill(parent, x, y, text, k, style) {
     const fs = 15 / k, padX = 6 / k, padY = 3.5 / k;
     const w = text.length * fs * 0.58 + 2 * padX, h = fs + 2 * padY;
+    if (clampBox) {
+      const [bx, by, bw, bh] = clampBox;
+      x = Math.min(Math.max(x, bx + w / 2 + 2 / k), bx + bw - w / 2 - 2 / k);
+      y = Math.min(Math.max(y, by + h / 2 + 2 / k), by + bh - h / 2 - 2 / k);
+    }
     el("rect", { x: x - w / 2, y: y - h / 2, width: w, height: h, rx: h / 2, fill: style.bg,
                  stroke: style.edge, "stroke-width": 1 / k }, parent);
     el("text", { x, y: y + fs * 0.35, "font-size": fs, "font-weight": 700, fill: style.ink,
@@ -646,6 +652,7 @@
     Object.entries({ x: vx, y: vy, width: vw, height: vh }).forEach(([a, n]) => clipRect.setAttribute(a, n));
 
     const labels = el("g", {}, root);
+    clampBox = [vx, vy, vw, vh];
     for (const { p, r } of placed) {
       const auto = p.part === "@dip" ? [p.pin1] : r.holes;     // a chip: name pin 1 only
       const tags = p.tags || (spec.tagHoles === false ? {} : Object.fromEntries(auto.map(h => [h, "down"])));
@@ -665,6 +672,7 @@
                    "font-family": "Segoe UI, system-ui, sans-serif", "text-anchor": n.anchor || "start" }, labels, n.text);
     }
 
+    clampBox = null;
     if (warnings.length) {
       const pre = document.createElement("pre");
       pre.className = "bb-warnings";
