@@ -8,6 +8,16 @@ The part drawings come from the [Fritzing parts library](https://github.com/frit
 about 2,100 parts, fetched on demand. The skill reads leg positions and connected holes from the
 library's own part files, so any part with a breadboard drawing can be placed.
 
+## Install
+
+Clone it into your Claude Code skills folder:
+
+```sh
+git clone https://github.com/TheJackFace/breadboard-pictures ~/.claude/skills/breadboard-pictures
+```
+
+Claude Code picks it up in the next session. Ask for breadboard build steps, or name the skill.
+
 ## What's in it
 
 | File | What it does |
